@@ -1,0 +1,26 @@
+<div class="card">
+    <p-table [value]="frutasDataModal" stripedRows  [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template #header>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Proveedor</th>
+                <th>Precio Unitario</th>
+                <th>Fecha Ingreso</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-FrutaData>
+            <tr>
+                <td>{{ FrutaData.idFruta }}</td>
+                <td>{{ FrutaData.nombreFruta }}</td>
+                <td>
+                    <p-badge [value]="FrutaData.cantidad" [severity]="stockSeverity(FrutaData)" />
+                </td>
+                <td>{{ FrutaData.proveedor }}</td>
+                <td>{{ FrutaData.precioUnitario }}</td>
+                <td>{{ FrutaData.fechaIngreso }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

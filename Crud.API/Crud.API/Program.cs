@@ -22,7 +22,15 @@ builder.Services.AddTransient<IApplicationDbContext, DbCrudContext>();
 
 builder.Services.AddApplicationServices();
 
-
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", policyBuilder =>
+    {
+        policyBuilder.AllowAnyHeader()
+        .AllowAnyMethod()
+        .WithOrigins("http://localhost:4200");
+    });
+});
 
 var app = builder.Build();
 
@@ -32,7 +40,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
