@@ -1,6 +1,6 @@
 <div class="card">
-    <p-table [value]="frutasDataModal" stripedRows  [tableStyle]="{ 'min-width': '50rem' }">
-        <ng-template #header>
+    <p-table [value]="frutasDataModal" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
@@ -10,12 +10,14 @@
                 <th>Fecha Ingreso</th>
             </tr>
         </ng-template>
-        <ng-template #body let-FrutaData>
+        <ng-template pTemplate="body" let-FrutaData>
             <tr>
                 <td>{{ FrutaData.idFruta }}</td>
                 <td>{{ FrutaData.nombreFruta }}</td>
                 <td>
-                    <p-badge [value]="FrutaData.cantidad" [severity]="stockSeverity(FrutaData)" />
+                    <div [ngClass]="{'outofstock': FrutaData.cantidad === 0, 'lowstock': (FrutaData.cantidad > 0 && FrutaData.cantidad < 10),'instock': FrutaData.cantidad > 10}">
+                        {{FrutaData.cantidad}}
+                    </div>
                 </td>
                 <td>{{ FrutaData.proveedor }}</td>
                 <td>{{ FrutaData.precioUnitario }}</td>

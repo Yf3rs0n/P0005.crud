@@ -4,11 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home-bienvenida',
-    pathMatch: 'full',
-  },
-  {
-    path: 'home-bienvenida',
     loadChildren: () =>
       import('../home/home-bienvenida/home-bienvenida.module').then(
         (m) => m.HomeBienvenidaModule
@@ -21,7 +16,6 @@ const routes: Routes = [
         '../frutas/administracion-frutas/administracion-frutas.module'
       ).then((m) => m.AdministracionFrutasModule),
   },
-  
 ];
 
 @NgModule({

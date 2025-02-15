@@ -1,12 +1,11 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { HomeBienvenidaRoutingModule } from './home-bienvenida-routing.module';
-import { HomeBienvenidaComponent } from './home-bienvenida.component';
 
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { LayoutModule } from '../../layout/layout.module';
+
+import { HomeBienvenidaRoutingModule } from './home-bienvenida-routing.module';
+import { HomeBienvenidaComponent } from './home-bienvenida.component';
 
 
 @NgModule({
@@ -15,11 +14,9 @@ import { LayoutModule } from '../../layout/layout.module';
   ],
   imports: [
     CommonModule,
-    HomeBienvenidaRoutingModule,
-    ButtonModule,
     CardModule,
-    LayoutModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    ButtonModule,
+    HomeBienvenidaRoutingModule
+  ]
 })
 export class HomeBienvenidaModule { }

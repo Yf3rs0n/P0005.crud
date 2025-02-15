@@ -22,6 +22,7 @@ builder.Services.AddTransient<IApplicationDbContext, DbCrudContext>();
 
 builder.Services.AddApplicationServices();
 
+//Cors
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("CorsPolicy", policyBuilder =>
