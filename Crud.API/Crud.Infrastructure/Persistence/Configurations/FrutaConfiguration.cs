@@ -1,23 +1,18 @@
 ﻿using Crud.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Crud.Infrastructure.Persistence.Configurations
 {
-    public class InventarioFrutumConfiguration : IEntityTypeConfiguration<InventarioFrutum>
+    public class FrutaConfiguration : IEntityTypeConfiguration<Fruta>
     {
-        public void Configure(EntityTypeBuilder<InventarioFrutum> builder)
+        public void Configure(EntityTypeBuilder<Fruta> builder)
         {
-            builder.HasKey(e => e.IdFruta).HasName("PK__inventar__64905FA1590BA61A");
+            builder.HasKey(e => e.Id).HasName("PK__fruta__64905FA11E1A062F");
 
-            builder.ToTable("inventario_fruta");
+            builder.ToTable("fruta");
 
-            builder.Property(e => e.IdFruta).HasColumnName("id_fruta");
+            builder.Property(e => e.Id).HasColumnName("id");
             builder.Property(e => e.Cantidad).HasColumnName("cantidad");
             builder.Property(e => e.FechaIngreso)
                 .HasDefaultValueSql("(getdate())")

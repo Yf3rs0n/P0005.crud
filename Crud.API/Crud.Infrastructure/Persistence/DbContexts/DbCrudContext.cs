@@ -16,11 +16,11 @@ public partial class DbCrudContext : DbContext, IApplicationDbContext
     {
     }
 
-    public virtual DbSet<InventarioFrutum> InventarioFruta { get; set; }
+    public virtual DbSet<Fruta> Frutas { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new InventarioFrutumConfiguration());
+        modelBuilder.ApplyConfiguration(new FrutaConfiguration());
 
         OnModelCreatingPartial(modelBuilder);
     }

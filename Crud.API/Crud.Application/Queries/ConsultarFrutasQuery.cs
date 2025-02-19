@@ -5,18 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Crud.Application.Queries
 {
-    public class ConsultarFrutasQuery : IRequest<List<InventarioFrutum>> { }
-    public class ConsultarFrutasQueryHandler : IRequestHandler<ConsultarFrutasQuery, List<InventarioFrutum>>
+    public class ConsultarFrutasQuery : IRequest<List<Fruta>>;
+    public class ConsultarFrutasQueryHandler(IApplicationDbContext context) : IRequestHandler<ConsultarFrutasQuery, List<Fruta>>
     {
-
-        private readonly IApplicationDbContext _context;
-        public ConsultarFrutasQueryHandler(IApplicationDbContext context)
+        private readonly IApplicationDbContext _context = context;
+        public async Task<List<Fruta>> Handle(ConsultarFrutasQuery request, CancellationToken cancellationToken)
         {
-            _context = context;
-        }
-        public async Task<List<InventarioFrutum>> Handle(ConsultarFrutasQuery request, CancellationToken cancellationToken)
-        {
-            return await _context.InventarioFruta.ToListAsync(cancellationToken);
+            return await _context.Frutas.ToListAsync(cancellationToken);
         }
     }
 }

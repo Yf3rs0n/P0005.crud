@@ -6,7 +6,7 @@ namespace Crud.Application.Interfaces
 {
     public interface IApplicationDbContext
     {
-        DbSet<InventarioFrutum> InventarioFruta { get; set; }
+        DbSet<Fruta> Frutas { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

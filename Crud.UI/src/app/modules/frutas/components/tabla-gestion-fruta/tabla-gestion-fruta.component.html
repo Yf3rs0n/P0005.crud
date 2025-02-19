@@ -1,5 +1,13 @@
 <div class="card">
-    <p-table [value]="frutasDataModal" [tableStyle]="{'min-width': '50rem'}">
+    <p-toast />
+    <p-toolbar styleClass="mb-5 gap-2">
+        <ng-template pTemplate="left">
+            <p-button severity="success" label="New" icon="pi pi-plus" class="mr-2" (onClick)="openNew()" />
+        </ng-template>
+    </p-toolbar>
+
+    <p-table [value]="frutasDataModal" [tableStyle]="{'min-width': '40rem'}" [paginator]="true" [rows]="10"
+        [rowsPerPageOptions]="[5,10,20]" [responsive]="true">
         <ng-template pTemplate="header">
             <tr>
                 <th>Id</th>
@@ -12,17 +20,96 @@
         </ng-template>
         <ng-template pTemplate="body" let-FrutaData>
             <tr>
-                <td>{{ FrutaData.idFruta }}</td>
+                <td>{{ FrutaData.id }}</td>
                 <td>{{ FrutaData.nombreFruta }}</td>
                 <td>
-                    <div [ngClass]="{'outofstock': FrutaData.cantidad === 0, 'lowstock': (FrutaData.cantidad > 0 && FrutaData.cantidad < 10),'instock': FrutaData.cantidad > 10}">
+                    <div
+                        [ngClass]="{'outofstock': FrutaData.cantidad === 0, 'lowstock': (FrutaData.cantidad > 0 && FrutaData.cantidad < 10),'instock': FrutaData.cantidad > 10}">
                         {{FrutaData.cantidad}}
                     </div>
                 </td>
                 <td>{{ FrutaData.proveedor }}</td>
                 <td>{{ FrutaData.precioUnitario }}</td>
                 <td>{{ FrutaData.fechaIngreso }}</td>
+                <td>
+                    <p-button 
+                        icon="pi pi-pencil" 
+                        class="mr-2" 
+                        [rounded]="true" 
+                        [outlined]="true" 
+                        severity="success" 
+                        (onClick)="openEdit(FrutaData)" />
+                    <p-button 
+                        icon="pi pi-trash" 
+                        severity="danger" 
+                        [rounded]="true" 
+                        [outlined]="true" 
+                        (onClick)="deleteFruta(FrutaData.id)" />
+                </td>
             </tr>
         </ng-template>
     </p-table>
 </div>
+
+<!-- Diálogo para crear fruta -->
+<p-dialog [(visible)]="frutasDialog" [style]="{ width: '450px' }" header="Crear Fruta" [modal]="true"
+    styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <form [formGroup]="frutaForm">
+            <div class="field">
+                <label for="nombreFruta">Nombre</label>
+                <input type="text" pInputText id="nombreFruta" formControlName="nombreFruta" required autofocus />
+            </div>
+            <div class="field">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" pInputText id="cantidad" formControlName="cantidad" required />
+            </div>
+            <div class="field">
+                <label for="precioUnitario">Precio Unitario</label>
+                <input type="number" pInputText id="precioUnitario" formControlName="precioUnitario" required />
+            </div>
+            <div class="field">
+                <label for="proveedor">Proveedor</label>
+                <input type="text" pInputText id="proveedor" formControlName="proveedor" required />
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <p-button label="Cancelar" icon="pi pi-times" [text]="true" (click)="frutasDialog = false" />
+        <p-button label="Guardar" icon="pi pi-check" [text]="true" (click)="saveFruta()"
+            [disabled]="frutaForm.invalid" />
+    </ng-template>
+</p-dialog>
+
+<!-- Diálogo para actualizar fruta -->
+<p-dialog [(visible)]="editFrutaDialog" [style]="{ width: '450px' }" header="Editar Fruta" [modal]="true"
+    styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <form [formGroup]="frutaForm">
+            <div class="field">
+                <label for="editNombreFruta">Nombre</label>
+                <input type="text" pInputText id="editNombreFruta" formControlName="nombreFruta" required autofocus />
+            </div>
+            <div class="field">
+                <label for="editCantidad">Cantidad</label>
+                <input type="number" pInputText id="editCantidad" formControlName="cantidad" required />
+            </div>
+            <div class="field">
+                <label for="editPrecioUnitario">Precio Unitario</label>
+                <input type="number" pInputText id="editPrecioUnitario" formControlName="precioUnitario" required />
+            </div>
+            <div class="field">
+                <label for="editProveedor">Proveedor</label>
+                <input type="text" pInputText id="editProveedor" formControlName="proveedor" required />
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <p-button label="Cancelar" icon="pi pi-times" [text]="true" (click)="editFrutaDialog = false" />
+        <p-button label="Guardar Cambios" icon="pi pi-check" [text]="true" (click)="updateFruta()"
+            [disabled]="frutaForm.invalid" />
+    </ng-template>
+
+</p-dialog>

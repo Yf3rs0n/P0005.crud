@@ -11,6 +11,6 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     LayoutRoutingModule,
     HttpClientModule
-  ]
+  ],
 })
 export class LayoutModule { }
